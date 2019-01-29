@@ -5,5 +5,5 @@ make
 sudo make install
 
 #### Пример.
-В examples пример использования.
+В examples пример использования.  
 Компиляция: gcc test.c -lmorph
