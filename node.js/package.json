@@ -1,0 +1,46 @@
+{
+  "name": "morph",
+  "preferGlobal": true,
+  "version": "1.0.4",
+  "author": "djvu <djvu@inbox.ru>",
+  "description": "Библиотека морфологического сравнения текстовых фраз, для node.js.",
+  "contributors": [
+    {
+      "name": "Jessy James",
+      "email": "djvu@inbox.ru"
+    }
+  ],
+  "bin": {
+    "morph": "./index.js"
+  },
+  "scripts": {
+    "preinstall": "node-waf configure build"
+  },
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dvjdjvu/libmorph.git"
+  },
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64",
+    "x86"
+  ],
+  "keywords": [
+    "cli",
+    "http",
+    "server"
+  ],
+  "license": "BSD",
+  "engines": {
+    "node": ">=0.6"
+  },
+  "dependencies": {
+    "balanced-match": "^1.0.0"
+  },
+  "devDependencies": {
+    "graceful-fs": "^4.1.15"
+  }
+}

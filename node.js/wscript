@@ -1,0 +1,51 @@
+import Options
+from os import unlink, symlink, popen, rmdir, remove, listdir
+from os.path import exists, join, islink, isdir
+from shutil  import rmtree
+
+APPNAME = "libmorph"
+
+srcdir = "."
+blddir = "build"
+VERSION = "0.0.1"
+
+def set_options(opt):
+  opt.tool_options("compiler_cxx")
+  opt.tool_options("compiler_cc")
+
+def configure(conf):
+  conf.check_tool("compiler_cxx")
+  conf.check_tool("compiler_cc")
+  conf.check_tool("node_addon")
+  conf.env.append_unique('LIBMORPH', ["-lmorph"])
+  conf.env.LINKFLAGS += conf.env.LIBMORPH
+
+def build(bld):
+  obj = bld.new_task_gen("cxx", "shlib", "node_addon")
+  obj.target = "libmorph"
+  obj.source = "src/morph_old.cpp"
+  obj.cxxflags = ["-D_FILE_OFFSET_BITS=64", "-D_LARGEFILE_SOURCE", "-lmorph"]
+  obj.uselib = ['LIBMORPH']
+
+def DeleteDir(dir):
+    for name in listdir(dir):
+        file = join(dir, name)
+        if not islink(file) and isdir(file):
+            DeleteDir(file)
+        else:
+            remove(file)
+    rmdir(dir)
+
+def shutdown():
+  if Options.commands['clean']:
+    if exists('libmorph.node'): unlink('libmorph.node')
+    #if exists('build'):         DeleteDir('build')
+    if exists('build'):         rmtree('build')
+    remove('libmorph.node')
+  else:
+    if exists('build/Release/libmorph.node') and not exists('libmorph.node'):
+      symlink('build/Release/libmorph.node', 'libmorph.node')
+      
+
+
+
