@@ -3,7 +3,6 @@ LINK = $(CC)
 
 PREFIX = /usr/local/morph
 PATH_DICTS = $(PREFIX)/dicts
-PATH_BIN = $(PREFIX)/bin
 
 PATH_LIBS = /usr/local/lib
 PATH_HEAD = /usr/local/include/morph
@@ -144,7 +143,6 @@ prebuild:
 
 install: 
 	test -d $(PREFIX) || mkdir -p $(PREFIX)
-	test -d $(PATH_BIN) || mkdir -p $(PATH_BIN)
 	test -d $(PATH_DICTS) || mkdir -p $(PATH_DICTS)
 	test -d $(PATH_HEAD) || mkdir -p $(PATH_HEAD)
 	test -d $(PATH_HEAD)/morphology/ || mkdir -p $(PATH_HEAD)/morphology
@@ -172,10 +170,10 @@ install:
 	
 	cp -rf $(SRC_TEXT)/*.h $(PATH_HEAD)/textprocessor/
 
-	@list='$(BINS2)'; for p in $$list; do \
-		echo "cp $(BUILD)/$$p $(PATH_BIN)/$$p"; \
-		`cp $(BUILD)/$$p $(PATH_BIN)/$$p`; \
-	done
+        #@list='$(BINS2)'; for p in $$list; do \
+        #	echo "cp $(BUILD)/$$p $(PATH_BIN)/$$p"; \
+        #	`cp $(BUILD)/$$p $(PATH_BIN)/$$p`; \
+        #done
 
 	ldconfig
 
